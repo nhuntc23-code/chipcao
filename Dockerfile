@@ -1,5 +1,5 @@
-# --- Bước 1: Sửa đổi từ openjdk-11 lên openjdk-17 ---
-FROM maven:3.8.6-openjdk-17 AS builder
+# --- Bước 1: Dùng bản Maven và Java 17 chuẩn ---
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
 
 COPY . .
@@ -7,7 +7,7 @@ COPY . .
 # Thực hiện build dự án
 RUN mvn clean package -DskipTests
 
-# --- Bước 2: Thay đổi Web Server Tomcat hỗ trợ Java 17 ---
+# --- Bước 2: Web Server Tomcat hỗ trợ Java 17 ---
 FROM tomcat:10.1-jdk17-temurin
 
 # Xóa các ứng dụng mặc định của Tomcat
